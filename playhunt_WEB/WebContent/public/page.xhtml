@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+		<p:panel>
+
+			<p:messages id="msg" />
+
+			<h:form>
+				<!-- Dodanie Menu -->
+				<p:tabMenu>
+					<p:menuitem value="Strona Główna" outcome="/public/main"
+						icon="pi pi-star">
+					</p:menuitem>
+					<!-- outcome="/main" -->
+					<p:menuitem value="Logowanie" outcome="/public/login"
+						icon="pi pi-user" rendered = "#{controlPanel_Bettings.login() == false}">
+					</p:menuitem>
+					
+					<p:menuitem value="Kontakt" outcome="/public/contact"
+						icon="pi pi-briefcase">
+					</p:menuitem>
+					
+					<p:menuitem value="Zarządzanie" outcome="/admin/controlPanel"
+						icon="pi pi-briefcase" rendered = "#{controlPanel_Bettings.login() == true}">
+					</p:menuitem>
+
+					<p:menuitem value="Wyloguj się" action="#{login.doLogout()}"
+						icon="pi pi-user" rendered = "#{controlPanel_Bettings.login() == true}">
+					</p:menuitem>
+				</p:tabMenu>
+
+				<!--=============================================================================-->
+
+
+				<p:panel style="centre;text-align: center;	font-weight: 500;">
+					<h:outputText
+						value="WITAMY NA NASZEJ STRONIE BUKMACHERSKIEJ PLAY HUNT, 
+		CZYLI NA STRONIE NUMER 1 W POLSCE POŚWIĘCONEJ GRZE HUNT SHOWDOWN 
+		ORAZ NA AKTUALNYCH TAM TURNIEJACH.
+		ZAGŁOSUJ NA SWÓJ ULUBIONY TEAM I KIBICUJ IM W NADCHODZĄCYCH WALKACH
+		A MOŻE WŁAŚNIE TO ON WYGRA A TY ZGARNIESZ PIENIĄDZE!"
+						style="color:grey;font-weight:bold;" />
+				</p:panel>
+				
+				<p:panel>
+					
+		<p:panelGrid columns="5">
+			<p:dataTable value="#{controlPanel_Bettings.getFullList()}" var="b">
+			<p:column priority="3">
+				<h:outputText value="#{b.firstGroupVotes}" />
+			</p:column>
+			</p:dataTable>
+		
+			<p:dataTable value="#{controlPanel_Bettings.getGroup1List()}" var="b">
+			<p:column priority="3">
+				<h:outputText value="#{b.name}" />
+			</p:column>
+			</p:dataTable>
+		
+			<h:outputText value="VS"/>
+			
+			<p:dataTable value="#{controlPanel_Bettings.getGroup2List()}" var="b" style="margin:0px 0px">
+				<p:column priority="3">
+					<h:outputText value="#{b.name}" />
+				</p:column>
+			</p:dataTable>
+		
+			<p:dataTable value="#{controlPanel_Bettings.getFullList()}" var="b">
+			<p:column priority="3">
+				<h:outputText value="#{b.secondGroupVotes}" />
+			</p:column>
+			</p:dataTable>
+		</p:panelGrid>
+		
+		
+		<h:panelGrid id="grid" columns="4" itemStyle="text-align:center"
+						style="width:100%;margin:10px 10px;" columnClasses="label,value"
+						layout="grid" styleClass="ui-panelgrid-blank">
+
+					</h:panelGrid>
+				</p:panel>
+
+
+
+
+			</h:form>
+		</p:panel>
+	</ui:define>
+
+</ui:composition>
+</html>

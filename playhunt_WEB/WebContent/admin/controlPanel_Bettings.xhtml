@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+		<p:panel>
+<h:body style="background-color: #eee; margin: 0.5em;">
+
+	<p:messages />
+
+	<h:form id="form-table" style="margin-bottom:1em;">
+	
+		<p:commandButton value="Dodaj nową walkę" action="#{controlPanel_Bettings.newBetting()}" style="margin-bottom:1em;"/>
+ 
+ 		<p:panelGrid columns="3">
+		<p:dataTable value="#{controlPanel_Bettings.getGroup1List()}" var="b">
+
+			<p:column priority="5">
+			<f:facet name="header">
+					<h:outputText value="Numer pierwszej grupy" />
+			</f:facet>
+				<h:outputText value="#{b.id}" />
+			</p:column>
+			
+			<p:column priority="3">
+			<f:facet name="header">
+					<h:outputText value="Nazwa pierwszej grupy" />
+			</f:facet>
+				<h:outputText value="#{b.name}" />
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Opcje pierwszej grupy" />
+				</f:facet>
+				<center>
+				<p:commandButton value="Edytuj"
+					action="#{controlPanel_Bettings.editBetting(b)}" style="margin:0px 15px"/>
+
+				 <p:commandButton value="Usuń"
+					action="#{controlPanel_Bettings.deleteBetting(b)}" update="@form" />
+				</center>
+			</p:column>
+
+		</p:dataTable>
+		<p:dataTable value="#{controlPanel_Bettings.getGroup2List()}" var="b" style="margin:0px 0px">
+
+			<p:column priority="5">
+			<f:facet name="header">
+					<h:outputText value="Numer drugiej grupy" />
+			</f:facet>
+				<h:outputText value="#{b.id}" />
+			</p:column>
+			
+			<p:column priority="3">
+			<f:facet name="header">
+					<h:outputText value="Nazwa drugiej grupy" />
+			</f:facet>
+				<h:outputText value="#{b.name}" />
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Opcje drugiej grupy" />
+				</f:facet>
+				<center>
+				<p:commandButton value="Edytuj"
+					action="#{controlPanel_Bettings.editBetting(b)}" style="margin:0px 15px"/>
+
+				 <p:commandButton value="Usuń"
+					action="#{controlPanel_Bettings.deleteBetting(b)}" update="@form" />
+				</center>
+			</p:column>
+
+		</p:dataTable>
+		</p:panelGrid>
+		
+	</h:form>
+
+</h:body>
+</p:panel>
+</ui:define>
+</ui:composition>
+</html>

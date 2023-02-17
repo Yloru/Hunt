@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+		<p:panel>
+
+			<p:messages id="msg" />
+
+			<h:form>
+
+				<!-- Dodanie Menu -->
+				<p:tabMenu>
+					<p:menuitem value="Strona Główna" outcome="/public/main" icon="pi pi-star">						
+					</p:menuitem> <!-- outcome="/main" -->
+					<p:menuitem value="Logowanie" outcome="/public/login" icon="pi pi-user">					
+					</p:menuitem>
+					<p:menuitem value="Kontakt"	outcome="/public/contact" icon="pi pi-briefcase">
+					</p:menuitem>				
+					<p:menuitem value="Zarządzanie" outcome="/admin/controlPanel"
+						icon="pi pi-briefcase">
+					</p:menuitem>
+					
+					<p:menuitem value="Wyloguj się" action="#{login.doLogout()}" icon="pi pi-user">
+					</p:menuitem>
+				</p:tabMenu>
+
+				<!--=============================================================================-->
+
+
+				<p:panel style="centre;text-align: center;	font-weight: 500;">
+					<p:button value="Zarządzanie Użytkownikami" outcome="controlPanel_Users" />
+					<p:button value="Zarządzanie Grupami" outcome="controlPanel_Groups" />
+					<p:button value="Zarządzanie Walkami" outcome="controlPanel_Bettings" />
+				</p:panel>
+
+			</h:form>
+		</p:panel>
+	</ui:define>
+
+</ui:composition>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+		<p:panel>
+			<h:body style="background-color: #eee; margin: 0.5em;">
+
+				<p:panel header="Opcje wyszukiwania" toggleable="true"
+					collapsed="true" style="margin-bottom: 1em;">
+					<h:form>
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputLabel value="Nazwa Grupy:" />
+							<p:inputText value="#{controlPanel_Groups.name}" />
+							<p:commandButton value="Szukaj" update="form-table" />
+						</h:panelGrid>
+					</h:form>
+				</p:panel>
+
+				<p:messages />
+
+				<h:form id="form-table" style="margin-bottom:1em;">
+
+					<p:commandButton value="Dodaj nową grupę"
+						action="#{controlPanel_Groups.newGroup()}"
+						style="margin-bottom:1em;" />
+
+					<p:dataTable value="#{controlPanel_Groups.list}" var="g"
+						lazy="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						paginator="true" rows="5" style="margin-bottom:20px">
+
+						<p:column priority="1">
+							<f:facet name="header">
+								<h:outputText value="Numer grupy" />
+							</f:facet>
+							<h:outputText value="#{g.id}" />
+						</p:column>
+
+						<p:column priority="4">
+							<f:facet name="header">
+								<h:outputText value="Nazwa grupy" />
+							</f:facet>
+							<h:outputText value="#{g.name}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="opcje" />
+							</f:facet>
+							<center>
+								<p:commandButton value="Edytuj"
+									action="#{controlPanel_Groups.editGroup(g)}"
+									style="margin:0px 15px" />
+
+								<p:commandButton value="Usuń"
+									action="#{controlPanel_Groups.deleteGroup(g)}" update="@form" />
+							</center>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+
+			</h:body>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

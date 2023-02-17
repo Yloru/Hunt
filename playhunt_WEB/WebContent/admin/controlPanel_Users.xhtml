@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+		<p:panel>
+<h:body style="background-color: #eee; margin: 0.5em;">
+
+	<p:panel header="Opcje wyszukiwania" toggleable="true" collapsed="true"
+		style="margin-bottom: 1em;">
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="login:" />
+				<p:inputText value="#{controlPanel_Users.login}" />
+				<p:commandButton value="Szukaj" update="form-table" />
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+
+	<p:messages />
+
+	<h:form id="form-table" style="margin-bottom:1em;">
+	
+		 <p:commandButton value="Dodaj nową osobę" action="#{controlPanel_Users.newUser()}" style="margin-bottom:1em;"/> 
+ 
+		<p:dataTable value="#{controlPanel_Users.list}" var="u" lazy="true"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                 paginator="true" rows="5" style="margin-bottom:20px">
+
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="login" />
+				</f:facet>
+				<h:outputText value="#{u.login}" />
+			</p:column>
+
+			<p:column priority="4">
+				<f:facet name="header">
+					<h:outputText value="password" />
+				</f:facet>
+				<h:outputText value="#{u.password}" />
+			</p:column>
+			
+			<p:column priority="3">
+				<f:facet name="header">
+					<h:outputText value="email" />
+				</f:facet>
+				<h:outputText value="#{u.email}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="opcje" />
+				</f:facet>
+				<center>
+				<p:commandButton value="Edytuj"
+					action="#{controlPanel_Users.editUser(u)}" style="margin:0px 15px"/>
+
+				 <p:commandButton value="Usuń"
+					action="#{controlPanel_Users.deleteUser(u)}" update="@form" />
+				</center>
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</p:panel>
+</ui:define>
+</ui:composition>
+</html>

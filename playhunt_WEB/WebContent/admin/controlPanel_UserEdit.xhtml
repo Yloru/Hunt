@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+    <f:viewAction action="#{controlPanel_UserEdit.onLoad()}" />
+</f:metadata>
+
+<h:body style="background-color: #eee; margin: 0.5em;">
+
+	<p:panel toggleable="true" header="Edycja rekordu">
+
+		<h:form rendered="#{controlPanel_UserEdit.user != null}">
+			<h:panelGrid columns="3" cellpadding="5">
+
+				<h:outputLabel for="u-login" value="login:" />
+				<p:inputText id="u-login" value="#{controlPanel_UserEdit.user.login}"
+					required="true" requiredMessage="podaj login"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="u-login" display="icon"/>
+
+				<h:outputLabel for="u-password" value="hasło:" />
+				<p:inputText id="u-password" value="#{controlPanel_UserEdit.user.password}"
+					required="true" requiredMessage="podaj hasło"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="u-password" display="icon"/>
+
+				<h:outputLabel for="u-email" value="e-mail:" />
+				<p:inputText id="u-email" value="#{controlPanel_UserEdit.user.email}"
+					required="true" requiredMessage="podaj e-mail"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="u-email" display="icon"/>
+				
+			</h:panelGrid>
+
+			<p:messages id="msgs" />
+
+			<p:commandButton value="Zapisz" action="#{controlPanel_UserEdit.saveData()}"
+				style="margin-right: 1em;" update="@form" />
+
+			<p:button value="Anuluj" outcome="controlPanel_Users" />
+		</h:form>
+
+	</p:panel>
+
+</h:body>
+
+</html>

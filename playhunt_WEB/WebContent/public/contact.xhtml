@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+		<p:panel>
+
+			<p:messages id="msg" />
+
+			<h:form>
+
+				<!-- Dodanie Menu -->
+				<p:tabMenu>
+					<p:menuitem value="Strona Główna" outcome="/public/main"
+						icon="pi pi-star">
+					</p:menuitem>
+					<!-- outcome="/main" -->
+					<p:menuitem value="Logowanie" outcome="/public/login"
+						icon="pi pi-user" rendered = "#{controlPanel_Bettings.login() == false}">
+					</p:menuitem>
+					
+					<p:menuitem value="Kontakt" outcome="/public/contact"
+						icon="pi pi-briefcase">
+					</p:menuitem>
+					
+					<p:menuitem value="Zarządzanie" outcome="/admin/controlPanel"
+						icon="pi pi-briefcase" rendered = "#{controlPanel_Bettings.login() == true}">
+					</p:menuitem>
+
+					<p:menuitem value="Wyloguj się" action="#{login.doLogout()}"
+						icon="pi pi-user" rendered = "#{controlPanel_Bettings.login() == true}">
+					</p:menuitem>
+				</p:tabMenu>
+
+				<!--=============================================================================-->
+
+				<center>
+					<h:panelGrid columns="1" cellpadding="10">
+						<h:outputText value="" />
+
+						<h:outputText value="Numer telefonu: 123-456-789" />
+
+						<h:outputText value="E-mail: PlayHunt@gmail.com" />
+
+						<h:outputText value="" />
+
+					</h:panelGrid>
+				</center>
+
+
+			</h:form>
+		</p:panel>
+
+	</ui:define>
+
+</ui:composition>
+</html>

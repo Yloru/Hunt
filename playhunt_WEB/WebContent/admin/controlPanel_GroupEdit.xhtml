@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+    <f:viewAction action="#{controlPanel_GroupEdit.onLoad()}" />
+</f:metadata>
+
+<h:body style="background-color: #eee; margin: 0.5em;">
+
+	<p:panel toggleable="true" header="Edycja rekordu">
+
+		<h:form rendered="#{controlPanel_GroupEdit.group != null}">
+			<h:panelGrid columns="3" cellpadding="5">
+
+				<h:outputLabel for="g-name" value="name:" />
+				<p:inputText id="g-name" value="#{controlPanel_GroupEdit.group.name}"
+					required="true" requiredMessage="podaj nawę grupy"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="g-name" display="icon"/>
+				
+			</h:panelGrid>
+
+			<p:messages id="msgs" />
+
+			<p:commandButton value="Zapisz" action="#{controlPanel_GroupEdit.saveData()}"
+				style="margin-right: 1em;" update="@form" />
+
+			<p:button value="Anuluj" outcome="controlPanel_Groups" />
+		</h:form>
+
+	</p:panel>
+
+</h:body>
+
+</html>
